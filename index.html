@@ -97,6 +97,7 @@ main{max-width:820px;margin:0 auto;padding:10px 16px 60px}
 .verdict{margin:14px 0 0 50px;font-weight:800;font-size:17px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .verdict.ok{color:var(--clover)}
 .verdict.no{color:var(--red)}
+.say.lm{background:var(--cyanSoft);border-color:var(--cyan)}
 .say{border:2px solid var(--line);background:var(--card);border-radius:999px;padding:2px 12px;cursor:pointer;font-family:var(--f-en);font-size:14px;font-weight:600;color:var(--ink)}
 .exp{margin:10px 0 0 50px;background:var(--bg2);border:2px dashed var(--line);border-radius:18px;padding:12px 16px;font-size:15.5px;line-height:1.8}
 .exp h4{margin:10px 0 2px;font-size:14.5px;color:var(--pink);font-weight:800}
@@ -483,7 +484,7 @@ const Q = [
 <h4>上下文線索</h4><p>Unable to do anything → 阻止不了，只好接受。</p>
 <h4>其他選項</h4><p>roam 漫遊（roam around the city）；invest 投資（invest in stocks）；flourish 蓬勃發展（vi.，不接受詞）</p>`},
 {id:18,part:2,stem:"___ people skills is important for maintaining healthy personal relationships.",
- opts:["Assuring","Belonging","Interacting","Possessing"],ans:3,say:"possessing",
+ opts:["Assuring","Belonging","Interacting","Possessing"],ans:3,say:"possess",
  exp:`<h4>句意</h4><p>具備<mark class="c">人際交往能力</mark>對維持健康的人際關係很重要。</p>
 <h4>答案</h4><p><b class="r">possess</b> [vt.] 擁有；具備。Possessing people skills <mark class="g">是動名詞片語，當主詞</mark>。</p>
 <p><mark class="c">people skills [U]</mark> 與人相處的能力：have good / develop people skills</p>
@@ -540,12 +541,12 @@ const Q = [
 <p><b class="r">potential</b> [U] 潛力；可能性</p>
 <h4>其他選項</h4><ul><li>(A) 歷史 → 在第一段（since its creation in 2015、Originally…）</li><li>(B) 價格 → <b>value ≠ price</b>，這裡的 value 是價值、重要性</li><li>(C) 科技 → 沒談區塊鏈、挖礦；more secure 只是其中一個特點</li></ul>`},
 {id:27,part:4,stem:"What allowed cryptocurrencies to be used to make daily purchases?",
- opts:["The support of different companies","The investments that people made","The creation of cryptocurrency credit cards","The creation of different cryptocurrencies"],ans:2,clue:["s5"],say:"credit cards",
+ opts:["The support of different companies","The investments that people made","The creation of cryptocurrency credit cards","The creation of different cryptocurrencies"],ans:2,clue:["s5"],say:"credit card",
  exp:`<h4>線索（細節題）</h4><p class="en">With the introduction of crypto credit cards, cryptocurrencies can now be used to make everyday transactions…</p>
 <p>allow + O + to V → 問「什麼讓它可以……」，文章直接給答案：信用卡的推出。</p>
 <h4>其他選項</h4><ul><li>(A) 公司支持 → 和「被接受」有關，但不是日常購買的直接原因。<b>相關 ≠ 最直接回答問題</b></li><li>(B) 投資 → 只說可以拿來投資</li><li>(D) 文章沒說「創造不同的加密貨幣」</li></ul>`},
 {id:28,part:4,stem:'What does "this" in the first paragraph refer to?',
- opts:["Cryptocurrency's use","Cryptocurrency's history","The crypto credit card","Traditional money"],ans:0,clue:["s3","s4"],say:"use",
+ opts:["Cryptocurrency's use","Cryptocurrency's history","The crypto credit card","Traditional money"],ans:0,clue:["s3","s4"],say:"primary",
  exp:`<h4>線索（代名詞指涉題）</h4><p class="en">Originally, its primary use was to buy digital assets. But recently, this has started to change.</p>
 <p>it → cryptocurrency；its → cryptocurrency's；<b>this → its primary use</b>。以前主要買 digital assets → 現在能買日用品、理髮 → 用途改變了。</p>
 <h4>其他選項</h4><ul><li>(B) 雖然有 Historically，但「開始改變」的是用途，不是歷史</li><li>(C) crypto credit cards 在 this <b>之後</b>才出現，不可能是指涉對象</li><li>(D) the money we are used to using 是拿來對比的</li></ul>`}
@@ -628,7 +629,7 @@ function paint(q){
   if(blank && q.part!==4) blank.textContent=q.opts[q.ans];
   if(cb){cb.classList.add(ok?"done":"miss");cb.querySelector("span").textContent=q.opts[q.ans];}
   if(q.clue) q.clue.forEach((s,k)=>{const e=$("#"+s);e.classList.add("clue");if(k===q.clue.length-1){const t=document.createElement("span");t.className="tag";t.textContent=q.id+"("+L[q.ans]+")";e.appendChild(t);}});
-  fb.innerHTML=`<div class="verdict ${ok?"ok":"no"}">${ok?"🍀 答對了！":"💭 正解是 ("+L[q.ans]+") "+esc(q.opts[q.ans])}<button class="say" data-say="${esc(q.say)}">🔊 ${esc(q.say)}</button></div><div class="exp">${q.exp}</div>`;
+  fb.innerHTML=`<div class="verdict ${ok?"ok":"no"}">${ok?"🍀 答對了！":"💭 正解是 ("+L[q.ans]+") "+esc(q.opts[q.ans])}<button class="say lm" data-lm="${esc(q.say)}">📘 Longman 發音・${esc(q.say)}</button><button class="say" data-say="${esc(q.say)}" title="快速朗讀">🔊</button></div><div class="exp">${q.exp}</div>`;
 }
 function paintAll(){Q.forEach(paint);stats();}
 
@@ -734,10 +735,17 @@ document.addEventListener("click",e=>{
   const o=e.target.closest(".opt"); if(o&&!o.disabled){choose(+o.dataset.q,+o.dataset.i,o);return;}
   const h=e.target.closest("[data-hint]"); if(h){const q=byId(+h.dataset.hint);h.innerHTML=`💡 <span class="hint">${q.hint}</span>`;h.disabled=true;return;}
   const sy=e.target.closest("[data-say]"); if(sy){speak(sy.dataset.say);return;}
+  const lm=e.target.closest("[data-lm]"); if(lm){openLongman(lm.dataset.lm);return;}
   const g=e.target.closest("[data-go]"); if(g){const t=$("#q"+g.dataset.go);t.scrollIntoView({block:"center"});t.animate&&!reduce&&t.animate([{transform:"scale(1)"},{transform:"scale(1.02)"},{transform:"scale(1)"}],{duration:400});return;}
   const z=e.target.closest("[data-t]"); if(z){const p=$("#"+z.dataset.t);p.classList.toggle("show");z.textContent=p.classList.contains("show")?"收起中文翻譯":"看中文翻譯";return;}
   const c=e.target.closest(".chip"); if(c){c.classList.toggle("flip");return;}
 });
+function openLongman(w){
+  const url="https://www.ldoceonline.com/search/english/direct/?q="+encodeURIComponent(w);
+  const win=window.open(url,"longman","width=760,height=720");
+  if(win) win.focus(); else location.href=url;
+  toast("已開啟 Longman，點字旁的 🔊 就能聽美式發音",true);
+}
 function speak(w){
   try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(w);u.lang="en-US";u.rate=.9;
     const v=speechSynthesis.getVoices().find(v=>v.lang==="en-US");if(v)u.voice=v;speechSynthesis.speak(u);}catch(e){}
