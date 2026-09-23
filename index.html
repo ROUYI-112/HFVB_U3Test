@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>柔柔的幸運草挑戰｜高頻 Test 03</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chiron+GoRound+TC:wght@400;600;800&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FDEEF5; --bg2:#FFF7FB; --card:#FFFFFF; --ink:#4A2A3A; --ink2:#8A5E72;
+  --pink:#EE5F9C; --pinkSoft:#FAD1E3; --cyan:#4FC1D1; --cyanSoft:#D5F3F7;
+  --clover:#34B557; --cloverSoft:#D8F4DE; --butter:#FFCF3F; --butterSoft:#FFF2C4;
+  --red:#E0445A; --line:#F3C3D8; --shadow:0 3px 0 #F0B6CF;
+  --markG:#B8F5A6; --markC:#A9EEF6;
+  --f-zh:"Chiron GoRound TC","PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
+  --f-en:"Fredoka","Chiron GoRound TC","PingFang TC",sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#241721; --bg2:#2C1C28; --card:#35222F; --ink:#FBE8F1; --ink2:#D7AFC3;
+    --pinkSoft:#5A2A42; --cyanSoft:#1F4A52; --cloverSoft:#1E4A2A; --butterSoft:#4E4220;
+    --line:#5C3A4D; --shadow:0 3px 0 #1A0F17; --red:#FF7A8C; --markG:#2F6B2A; --markC:#1E5A64;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#241721; --bg2:#2C1C28; --card:#35222F; --ink:#FBE8F1; --ink2:#D7AFC3;
+  --pinkSoft:#5A2A42; --cyanSoft:#1F4A52; --cloverSoft:#1E4A2A; --butterSoft:#4E4220;
+  --line:#5C3A4D; --shadow:0 3px 0 #1A0F17; --red:#FF7A8C; --markG:#2F6B2A; --markC:#1E5A64;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{background:var(--bg);scroll-padding-top:calc(env(safe-area-inset-top,0px) + 76px);scroll-behavior:smooth}
+body{margin:0;color:var(--ink);font-family:var(--f-zh);font-size:17px;line-height:1.75;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--cyan);outline-offset:2px;border-radius:10px}
+
+/* ---------- top bar ---------- */
+main{margin-top:40px}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:2px dashed var(--line)}
+.bar-in{max-width:980px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.jar{display:flex;align-items:center;gap:6px;font-family:var(--f-en);font-weight:700;font-size:20px;background:var(--cloverSoft);padding:3px 14px 3px 8px;border-radius:999px}
+.jar .ico{font-size:22px;display:inline-block}
+.jar.bump .ico{animation:bump .5s}
+@keyframes bump{40%{transform:scale(1.6) rotate(-20deg)}}
+.streak{font-family:var(--f-en);font-weight:600;font-size:15px;color:var(--ink2);min-width:64px}
+.prog{flex:1;min-width:120px;height:14px;background:var(--pinkSoft);border-radius:99px;overflow:hidden;position:relative}
+.prog i{position:absolute;inset:0 auto 0 0;width:0;background:repeating-linear-gradient(-45deg,var(--pink) 0 10px,#F57FB2 10px 20px);border-radius:99px;transition:width .5s cubic-bezier(.3,1.4,.5,1)}
+.prog-t{font-family:var(--f-en);font-size:14px;color:var(--ink2);min-width:44px;text-align:right}
+.seg{display:flex;background:var(--card);border:2px solid var(--line);border-radius:999px;padding:2px}
+.seg button{border:0;background:transparent;padding:4px 12px;border-radius:999px;cursor:pointer;font-size:14px;font-weight:600}
+.seg button[aria-pressed="true"]{background:var(--pink);color:#fff}
+.icon-btn{border:2px solid var(--line);background:var(--card);width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:17px;display:grid;place-items:center}
+
+/* ---------- sections ---------- */
+main{max-width:820px;margin:0 auto;padding:10px 16px 60px}
+.part{margin-top:46px}
+.part-h{display:flex;align-items:baseline;gap:12px;margin-bottom:6px;flex-wrap:wrap}
+.part-h .num{font-family:var(--f-en);font-weight:700;font-size:15px;color:#fff;background:var(--pink);padding:2px 12px;border-radius:999px}
+.part-h h2{margin:0;font-size:26px;font-weight:800}
+.part-h .sub{color:var(--ink2);font-size:15px}
+.part-score{font-family:var(--f-en);font-weight:600;color:var(--clover);margin-left:auto;font-size:15px}
+
+.q{background:var(--card);border:2.5px solid var(--line);border-radius:22px;padding:18px 18px 16px;margin:16px 0;position:relative;transition:border-color .3s}
+.q.ok{border-color:var(--clover)}
+.q.no{border-color:var(--red)}
+.q-top{display:flex;gap:12px;align-items:flex-start}
+.qn{flex:none;font-family:var(--f-en);font-weight:700;font-size:17px;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--butterSoft);color:var(--ink);border:2px solid var(--butter)}
+.q.ok .qn{background:var(--clover);border-color:var(--clover);color:#fff}
+.q.no .qn{background:var(--red);border-color:var(--red);color:#fff}
+.stem{font-family:var(--f-en);font-weight:500;font-size:18.5px;line-height:1.6;padding-top:4px}
+.blank{display:inline-block;min-width:78px;border-bottom:3px solid var(--pink);text-align:center;margin:0 3px;color:var(--pink);font-weight:600;line-height:1.2}
+.stem-zh{font-family:var(--f-zh);font-size:16px;font-weight:600}
+.hint-btn{border:0;background:var(--cyanSoft);border-radius:999px;padding:2px 12px;font-size:13.5px;cursor:pointer;margin:6px 0 0 50px}
+.hint{font-family:var(--f-en);font-weight:600;color:var(--cyan);letter-spacing:1px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0 0 50px}
+.opt{display:flex;align-items:center;gap:10px;text-align:left;border:2.5px solid var(--line);background:var(--bg2);border-radius:16px;padding:10px 14px;cursor:pointer;font-family:var(--f-en);font-weight:500;font-size:17px;box-shadow:var(--shadow);transition:transform .08s,background .2s,border-color .2s}
+.opt:hover{border-color:var(--pink)}
+.opt:active{transform:translateY(2px);box-shadow:none}
+.opt .l{flex:none;width:28px;height:28px;border-radius:50%;background:var(--card);border:2px solid var(--line);display:grid;place-items:center;font-weight:700;font-size:14px}
+.opt.sel{border-color:var(--cyan);background:var(--cyanSoft)}
+.opt.sel .l{background:var(--cyan);border-color:var(--cyan);color:#fff}
+.opt.right{border-color:var(--clover);background:var(--cloverSoft)}
+.opt.right .l{background:var(--clover);border-color:var(--clover);color:#fff}
+.opt.wrong{border-color:var(--red);background:color-mix(in srgb,var(--red) 14%,var(--card));animation:shake .35s}
+.opt.wrong .l{background:var(--red);border-color:var(--red);color:#fff}
+.opt[disabled]{cursor:default}
+.opt[disabled]:hover{border-color:inherit}
+.opt.right[disabled]:hover{border-color:var(--clover)}
+.opt.wrong[disabled]:hover{border-color:var(--red)}
+.opt .zh{font-family:var(--f-zh);font-size:15px;font-weight:600}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.verdict{margin:14px 0 0 50px;font-weight:800;font-size:17px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.verdict.ok{color:var(--clover)}
+.verdict.no{color:var(--red)}
+.say{border:2px solid var(--line);background:var(--card);border-radius:999px;padding:2px 12px;cursor:pointer;font-family:var(--f-en);font-size:14px;font-weight:600;color:var(--ink)}
+.exp{margin:10px 0 0 50px;background:var(--bg2);border:2px dashed var(--line);border-radius:18px;padding:12px 16px;font-size:15.5px;line-height:1.8}
+.exp h4{margin:10px 0 2px;font-size:14.5px;color:var(--pink);font-weight:800}
+.exp h4:first-child{margin-top:0}
+.exp p{margin:0}
+.exp .en{font-family:var(--f-en);font-weight:500}
+.exp ul{margin:2px 0;padding-left:1.2em}
+.r{color:var(--red);font-weight:700}
+mark.g{background:var(--markG);color:inherit;padding:0 3px;border-radius:4px}
+mark.c{background:var(--markC);color:inherit;padding:0 3px;border-radius:4px}
+.tip{background:var(--butterSoft);border-radius:12px;padding:6px 12px;margin-top:8px}
+
+/* passages */
+.passage{background:var(--card);border:2.5px solid var(--ink);border-radius:24px;padding:20px 22px;margin:16px 0;font-family:var(--f-en);font-size:18px;line-height:1.9;box-shadow:6px 6px 0 var(--pinkSoft)}
+.passage p{margin:0 0 12px;text-indent:1.6em}
+.passage p:last-child{margin-bottom:0}
+.cblank{display:inline-flex;align-items:center;gap:4px;border:0;border-bottom:3px solid var(--pink);background:var(--pinkSoft);border-radius:8px 8px 0 0;padding:0 10px;cursor:pointer;font-family:var(--f-en);font-weight:600;color:var(--pink);min-width:96px;justify-content:center;line-height:1.5}
+.cblank.done{background:var(--cloverSoft);color:var(--clover);border-color:var(--clover)}
+.cblank.miss{background:color-mix(in srgb,var(--red) 16%,var(--card));color:var(--red);border-color:var(--red)}
+.cblank sup{font-size:12px;opacity:.8}
+.sent{transition:background .4s;border-radius:6px}
+.sent.clue{background:var(--butterSoft);box-shadow:0 0 0 2px var(--butterSoft)}
+.tag{display:inline-block;font-family:var(--f-en);font-weight:700;font-size:12.5px;background:var(--butter);color:#4A2A3A;border-radius:6px;padding:0 6px;margin-left:4px;vertical-align:2px;text-indent:0}
+.zh-toggle{border:2px solid var(--line);background:var(--card);border-radius:999px;padding:4px 14px;cursor:pointer;font-size:14px;font-weight:600}
+.zh-trans{display:none;background:var(--bg2);border-radius:18px;padding:14px 18px;margin-top:10px;font-size:15.5px;line-height:1.9}
+.zh-trans.show{display:block}
+
+/* chips */
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.chip{perspective:600px;border:0;background:none;padding:0;cursor:pointer}
+.chip span{display:block;border-radius:14px;padding:8px 14px;font-size:15px;transition:transform .45s;backface-visibility:hidden}
+.chip .f{background:var(--cyanSoft);font-family:var(--f-en);font-weight:600;border:2px solid var(--cyan)}
+.chip .b{background:var(--butterSoft);border:2px solid var(--butter);font-weight:600;position:absolute;inset:0;transform:rotateY(180deg);display:grid;place-items:center;white-space:nowrap}
+.chip{position:relative}
+.chip.flip .f{transform:rotateY(180deg)}
+.chip.flip .b{transform:rotateY(0)}
+
+/* exam submit */
+.submit-wrap{text-align:center;margin:40px 0 0}
+.big-btn{font-family:var(--f-zh);font-weight:800;font-size:19px;border:3px solid var(--ink);background:var(--pink);color:#fff;border-radius:999px;padding:12px 34px;cursor:pointer;box-shadow:0 5px 0 var(--ink)}
+.big-btn:active{transform:translateY(4px);box-shadow:0 1px 0 var(--ink)}
+.big-btn.alt{background:var(--card);color:var(--ink)}
+.howto{margin-top:30px;background:var(--card);border:2px solid var(--line);border-radius:20px;padding:6px 18px}
+.howto summary{cursor:pointer;font-weight:800;padding:8px 0}
+.howto ol{margin:0 0 12px;padding-left:1.3em;font-size:15.5px}
+
+/* toast */
+.toast{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 74px);transform:translate(-50%,-20px) scale(.9);opacity:0;z-index:60;background:var(--card);border:3px solid var(--ink);border-radius:22px;padding:10px 20px;font-weight:800;font-size:17px;box-shadow:5px 5px 0 var(--clover);pointer-events:none;transition:all .3s cubic-bezier(.3,1.5,.5,1);white-space:nowrap;max-width:92vw;overflow:hidden;text-overflow:ellipsis}
+.toast.show{opacity:1;transform:translate(-50%,0) scale(1)}
+.toast.no{box-shadow:5px 5px 0 var(--butter)}
+.fly{position:fixed;z-index:70;font-size:30px;pointer-events:none;transition:transform .75s cubic-bezier(.5,-0.3,.4,1),opacity .75s}
+
+/* result modal */
+.modal{position:fixed;inset:0;z-index:80;background:rgba(74,42,58,.55);display:none;place-items:center;padding:20px}
+.modal.show{display:grid}
+.card-r{background:var(--card);border:3px solid var(--ink);border-radius:30px;max-width:440px;width:100%;padding:26px 24px 22px;text-align:center;box-shadow:8px 8px 0 var(--pink);animation:pop .5s cubic-bezier(.3,1.6,.5,1);max-height:88vh;overflow:auto}
+@keyframes pop{from{transform:scale(.6);opacity:0}}
+.badge{font-size:66px;line-height:1}
+.card-r h3{margin:6px 0 2px;font-size:26px;font-weight:800}
+.score{font-family:var(--f-en);font-weight:700;font-size:58px;color:var(--pink);line-height:1.1}
+.score small{font-size:22px;color:var(--ink2)}
+.clover-row{font-size:22px;letter-spacing:2px;line-height:1.5;margin:10px 0;word-break:break-all}
+.card-r p{color:var(--ink2);margin:6px 0 16px}
+.card-r .btns{display:flex;flex-direction:column;gap:10px;align-items:center}
+.wrong-list{font-family:var(--f-en);font-size:14px;color:var(--red);margin:-6px 0 14px}
+canvas#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:75}
+
+/* ---------- atmosphere ---------- */
+.atmo{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.band{position:absolute;left:-30%;width:160%;transform:rotate(-28deg);transform-origin:center}
+.band.b1{top:38%;height:150px;background:var(--pinkSoft);opacity:.8}
+.band.b2{top:calc(38% + 190px);height:46px;background:var(--pinkSoft);opacity:.55}
+.atmo .ring{position:absolute;border-radius:50%;border:14px solid var(--pink);opacity:.22}
+.atmo .ring.thin{border-width:8px;opacity:.18}
+.atmo .ring.cy{border-color:var(--cyan)}
+.atmo .dot{position:absolute;border-radius:50%;background:var(--card);opacity:.7}
+
+
+.hero{max-width:900px;margin:0 auto;padding:40px 16px 10px}
+.note{position:relative;background:
+   repeating-linear-gradient(to bottom,transparent 0 33px,color-mix(in srgb,var(--cyan) 28%,transparent) 33px 35px),
+   var(--card);
+  border:3px solid var(--ink);border-radius:26px;padding:52px 34px 34px 58px;box-shadow:8px 8px 0 var(--pink),8px 8px 0 3px var(--ink)}
+.note::before{content:"";position:absolute;left:18px;top:22px;bottom:22px;width:18px;
+  background:radial-gradient(circle at 9px 9px,var(--bg) 5px,var(--ink) 5.5px 7.5px,transparent 8px) 0 0/18px 34px repeat-y}
+.note::after{content:"";position:absolute;left:44px;top:0;bottom:0;width:2px;background:color-mix(in srgb,var(--pink) 45%,transparent)}
+.bow{position:absolute;width:118px;left:50%;top:-38px;transform:translateX(-50%) rotate(-4deg)}
+.clip{position:absolute;width:38px;right:30px;top:22px;transform:rotate(14deg)}
+.cherry{position:absolute;width:74px;right:26px;top:70px;transform:rotate(8deg);filter:drop-shadow(3px 3px 0 var(--pinkSoft))}
+.quill{position:absolute;width:300px;right:-40px;bottom:-54px;transform:rotate(-8deg);filter:drop-shadow(3px 4px 0 rgba(74,42,58,.18))}
+.star{position:absolute;color:var(--butter);font-size:26px;line-height:1}
+.star.s1{right:130px;top:40px}.star.s2{right:56px;top:170px;font-size:18px;color:var(--cyan)}.star.s3{left:52%;bottom:26px;font-size:20px;color:var(--pink)}
+.hero h1{font-family:var(--f-en);font-weight:700;font-size:clamp(46px,8vw,84px);line-height:1;margin:0 0 6px;color:var(--pink);letter-spacing:-.5px;text-shadow:3px 3px 0 var(--butter)}
+.hero h1 small{display:block;font-family:var(--f-zh);font-weight:800;font-size:.34em;color:var(--ink);text-shadow:none;margin-bottom:10px;letter-spacing:1px}
+.hero p.lead{font-size:17px;color:var(--ink2);max-width:28em;margin:14px 0 18px}
+.bubble{display:inline-block;background:var(--cyanSoft);border:2.5px solid var(--ink);border-radius:22px 22px 22px 6px;padding:8px 18px;font-weight:600;margin-bottom:18px;transform:rotate(-1.5deg)}
+.parts{display:flex;flex-wrap:wrap;gap:8px;margin:0}
+.parts a{text-decoration:none;color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:14px;padding:6px 12px;font-size:14px;font-weight:600;box-shadow:var(--shadow)}
+.parts a b{font-family:var(--f-en);color:var(--pink);margin-right:4px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;color:var(--ink2);margin-bottom:14px}
+.q,.passage{position:relative}
+.part-h .num{box-shadow:2px 2px 0 var(--butter)}
+@media (max-width:720px){
+  .note{padding:48px 18px 70px 50px}
+  .note::before{left:12px}.note::after{left:38px}
+  .cherry{width:54px;right:12px;top:58px}
+  .clip{right:14px;top:16px;width:30px}
+  .quill{width:220px;right:-24px;bottom:-40px}
+  .star.s1{right:80px;top:30px}.star.s2{display:none}
+  .bubble{margin-right:54px;font-size:15px}
+}
+
+footer{text-align:center;color:var(--ink2);font-size:14px;padding:20px 16px 40px}
+
+@media (max-width:720px){
+  .opts{grid-template-columns:1fr;margin-left:0}
+  .exp,.verdict,.hint-btn{margin-left:0}
+  .stem{font-size:17.5px}
+  .passage{padding:16px;font-size:17px}
+  .streak{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-in">
+    <div class="jar" id="jar" title="收集到的幸運草"><span class="ico">🍀</span><span id="jarN">0</span></div>
+    <div class="streak" id="streak"></div>
+    <div class="prog" aria-hidden="true"><i id="progI"></i></div>
+    <div class="prog-t" id="progT">0/28</div>
+    <div class="seg" role="group" aria-label="作答模式">
+      <button id="mPractice" aria-pressed="true">練習</button>
+      <button id="mExam" aria-pressed="false">考試</button>
+    </div>
+    <button class="icon-btn" id="themeBtn" aria-label="切換深淺色">🌙</button>
+  </div>
+</div>
+
+<div class="atmo" aria-hidden="true">
+  <span class="band b1"></span><span class="band b2"></span>
+  <span class="ring" style="width:220px;height:220px;right:-70px;top:60px"></span>
+  <span class="ring thin" style="width:110px;height:110px;right:90px;top:220px"></span>
+  <span class="ring cy" style="width:160px;height:160px;left:-70px;top:55%"></span>
+  <span class="ring thin" style="width:70px;height:70px;left:8%;top:18%"></span>
+  <span class="ring cy thin" style="width:90px;height:90px;right:6%;bottom:12%"></span>
+  <span class="dot" style="width:120px;height:120px;left:-30px;bottom:-30px"></span>
+</div>
+
+<header class="hero">
+  <div class="note">
+    <svg class="bow" viewBox="0 0 120 70" aria-hidden="true"><path d="M60 35 C40 5 8 4 6 22 C4 40 30 48 60 35Z" fill="#FFCF3F" stroke="#4A2A3A" stroke-width="2.5" stroke-linejoin="round"/><path d="M60 35 C80 5 112 4 114 22 C116 40 90 48 60 35Z" fill="#FFCF3F" stroke="#4A2A3A" stroke-width="2.5" stroke-linejoin="round"/><path d="M52 38 L38 66 L50 62 L56 68 L60 40Z M68 38 L82 66 L70 62 L64 68 L60 40Z" fill="#F5B82E" stroke="#4A2A3A" stroke-width="2.5" stroke-linejoin="round"/><rect x="51" y="25" width="18" height="20" rx="6" fill="#FFCF3F" stroke="#4A2A3A" stroke-width="2.5"/><path d="M20 20 q8 -6 18 2 M100 20 q-8 -6 -18 2" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" opacity=".8"/></svg>
+    <svg class="clip" viewBox="0 0 40 36" aria-hidden="true"><path d="M20 33 C6 22 2 16 4 10 C6 3 15 2 20 10 C25 2 34 3 36 10 C38 16 34 22 20 33Z" fill="none" stroke="#4FC1D1" stroke-width="4" stroke-linejoin="round"/></svg>
+    <svg class="cherry" viewBox="0 0 70 70" aria-hidden="true"><path d="M22 48 C26 30 34 18 48 10 M46 50 C46 34 46 22 48 10" stroke="#6B8F3A" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M48 10 C56 4 66 8 66 14 C58 18 52 16 48 10Z" fill="#6FCB7A" stroke="#4A2A3A" stroke-width="2"/><circle cx="20" cy="54" r="12" fill="#E8475F" stroke="#4A2A3A" stroke-width="2.5"/><circle cx="46" cy="55" r="12" fill="#E8475F" stroke="#4A2A3A" stroke-width="2.5"/><circle cx="15" cy="50" r="3" fill="#fff" opacity=".85"/><circle cx="41" cy="51" r="3" fill="#fff" opacity=".85"/></svg>
+    <span class="star s1">✦</span><span class="star s2">✦</span><span class="star s3">✧</span>
+
+    <div class="bubble">柔柔，今天也一起收集幸運草吧！</div>
+    <h1><small>高頻字彙完全攻略</small>Test 03</h1>
+    <p class="lead">28 題，每答對一題就收下一片 🍀。練習模式點下去馬上看解析；考試模式寫完再一起交卷。</p>
+    <div class="legend">
+      <span><b class="r">紅字</b> 要會的字</span>
+      <span><mark class="g">綠螢光</mark> 文法・用法</span>
+      <span><mark class="c">藍螢光</mark> chunk</span>
+    </div>
+    <nav class="parts" aria-label="題組">
+      <a href="#p1"><b>1</b>單字填空</a>
+      <a href="#p2"><b>2</b>字彙選擇</a>
+      <a href="#p3"><b>3</b>克漏字</a>
+      <a href="#p4"><b>4</b>短文閱讀</a>
+    </nav>
+
+    <svg class="quill" viewBox="0 0 300 150" aria-hidden="true">
+      <line x1="118" y1="72" x2="268" y2="128" stroke="#8FD3E6" stroke-width="9" stroke-linecap="round"/>
+      <line x1="118" y1="72" x2="268" y2="128" stroke="#4A2A3A" stroke-width="1.5" stroke-dasharray="0" opacity=".25"/>
+      <path d="M262 124 L296 140 L270 118Z" fill="#E8C66A" stroke="#4A2A3A" stroke-width="2" stroke-linejoin="round"/>
+      <g stroke="#4A2A3A" stroke-width="2" fill="#fff" stroke-linejoin="round">
+        <path d="M92 48 C70 20 40 16 26 28 C38 30 30 40 44 42 C36 48 44 56 56 54 C52 62 66 66 80 58Z"/>
+        <path d="M100 92 C82 118 54 126 40 116 C52 112 44 104 58 100 C50 94 58 86 70 88 C66 80 80 76 92 84Z"/>
+      </g>
+      <g stroke="#2E8B45" stroke-width="2.2" fill="#43C064">
+        <path d="M100 70 C88 58 86 44 96 40 C104 36 110 46 104 56 C112 46 124 48 124 58 C124 68 112 72 100 70Z"/>
+        <path d="M100 70 C112 82 114 96 104 100 C96 104 90 94 96 84 C88 94 76 92 76 82 C76 72 88 68 100 70Z"/>
+        <path d="M100 70 C88 82 74 84 70 74 C66 66 76 60 86 66 C76 58 78 46 88 46 C98 46 102 58 100 70Z"/>
+        <path d="M100 70 C112 58 126 56 130 66 C134 74 124 80 114 74 C124 82 122 94 112 94 C102 94 98 82 100 70Z"/>
+      </g>
+      <circle cx="100" cy="70" r="3.5" fill="#E9FFD9"/>
+      <path d="M92 52 C94 48 98 47 100 50" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round" opacity=".8"/>
+    </svg>
+  </div>
+</header>
+
+
+<main>
+  <section class="part" id="p1">
+    <div class="part-h"><span class="num">Part 1</span><h2>單字填空</h2><span class="sub">原本是字首字尾提示，這裡改成點選；卡住可以看提示</span><span class="part-score" data-ps="1"></span></div>
+    <div id="list1"></div>
+  </section>
+
+  <section class="part" id="p2">
+    <div class="part-h"><span class="num">Part 2</span><h2>字彙選擇</h2><span class="sub">Q11–Q20</span><span class="part-score" data-ps="2"></span></div>
+    <div id="list2"></div>
+  </section>
+
+  <section class="part" id="p3">
+    <div class="part-h"><span class="num">Part 3</span><h2>克漏字</h2><span class="sub">點文章裡的空格可以跳到題目</span><span class="part-score" data-ps="3"></span></div>
+    <div class="passage" id="cloze"></div>
+    <button class="zh-toggle" data-t="zh3">看中文翻譯</button>
+    <div class="zh-trans" id="zh3">2021 年，一種新型態的數位媒體徹底改變了人們對於買賣商品的看法。這裡所說的數位資產稱為 NFT。這些「非同質化代幣」只能在網際網路上購買。這為投資開創了一個全新的領域，因為一些最熱門的 NFT 已經賣到了數百萬美元！<br>這些現代形式的財產也改變了人們評估加密貨幣價值的方式。一般而言，大多數商品都有一個等值的價值，而這個價值會拿來與美元相比較。直到 NFT 出現之前，加密貨幣並沒有這樣的等值價值；而 NFT 的出現使得加密貨幣日益受到歡迎這件事更加令人振奮。<br><br><b>整篇語意鏈：</b>21 NFT 是什麼？digital asset → 22 完整名稱 non-fungible tokens → 23 帶來什麼？investments → 24 屬於什麼概念？forms of property → 25 價值怎麼比？equivalent value</div>
+    <div id="list3"></div>
+  </section>
+
+  <section class="part" id="p4">
+    <div class="part-h"><span class="num">Part 4</span><h2>短文閱讀</h2><span class="sub">答完後，線索句會自動畫起來並標上題號</span><span class="part-score" data-ps="4"></span></div>
+    <div class="passage" id="reading"></div>
+    <button class="zh-toggle" data-t="zh4">看中文翻譯</button>
+    <div class="zh-trans" id="zh4">自 2015 年創立以來，加密貨幣已經歷了相當大的發展與變化。從歷史上來看，加密貨幣一直沒有被視為與我們習慣使用的傳統貨幣等值的東西。起初，它的主要用途是購買數位資產。但最近，這種情況開始改變了。隨著加密貨幣信用卡的推出，現在人們可以使用加密貨幣進行日常交易，例如購買日常用品或去理髮。<br>隨著越來越多的公司接受並支持加密貨幣，加密貨幣已經同時成為一種投資機會以及一種被接受的支付方式。比特幣和其他加密貨幣的這些實際應用顯示出，它們未來可能取代我們目前所熟知的現代貨幣。它們正變得越來越容易使用、越來越安全，並且成為一種有保障的方式，可以保護自己免受日益上升的通貨膨脹影響。而儘管未來仍然充滿不確定性，加密貨幣真正的價值正逐漸開始顯現出來。</div>
+    <div id="list4"></div>
+    <h3 style="margin:34px 0 0;font-size:20px">重要片語 <span style="font-size:14px;color:var(--ink2);font-weight:600">點一下翻面</span></h3>
+    <div class="chips" id="chips"></div>
+  </section>
+
+  <div class="submit-wrap" id="submitWrap" hidden>
+    <button class="big-btn" id="submitBtn">交卷，看看收集幾片 🍀</button>
+  </div>
+  <div class="submit-wrap">
+    <button class="big-btn alt" id="resetBtn">全部重來</button>
+  </div>
+
+  <details class="howto">
+    <summary>怎麼訂正</summary>
+    <ol>
+      <li>單字題把生字寫一次，不會的字把中文意思寫上去。</li>
+      <li>克漏字錯題有筆記即可，重點是自己了解錯誤，不是為了給老師檢查。</li>
+      <li>閱測錯題要有筆記，把句子線索畫起來、寫題號，例如 24(D)。時間久了就會看閱測找線索答題。</li>
+    </ol>
+  </details>
+</main>
+
+<footer>高頻 Test 03・Detailed Explanations</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<canvas id="fx"></canvas>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="rTitle">
+  <div class="card-r">
+    <div class="badge" id="rBadge">🍀</div>
+    <h3 id="rTitle">四葉草女王</h3>
+    <div class="score"><span id="rScore">0</span><small> / 28</small></div>
+    <div class="clover-row" id="rRow"></div>
+    <p id="rMsg"></p>
+    <div class="wrong-list" id="rWrong"></div>
+    <div class="btns">
+      <button class="big-btn" id="retryWrong">只重做錯題</button>
+      <button class="big-btn alt" id="closeModal">回去看解析</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============ DATA ============ */
+const Q = [
+/* ---------- Part 1 ---------- */
+{id:1,part:1,hint:"e _ _ _ _ _ _ _ _ t",
+ stem:"Thinking that you're an expert at something after doing it just once is ___ to reading a book about basketball and then expecting to play like a professional.",
+ opts:["exclusive","equivalent","negotiable","airtight"],ans:1,say:"equivalent",
+ exp:`<h4>① 詞性</h4><p><b class="r">equivalent</b> [adj.] 相等的；等同的。主詞是整個 V-ing 片語 <span class="en">Thinking that you're an expert…</span>，後面是 <span class="en">is ___ to</span> → 需要形容詞。</p>
+<h4>② 上下文線索</h4><p class="en">reading a book about basketball and then expecting to play like a professional</p><p>這是在做類比：只做一次就自認專家 ≈ 讀一本籃球書就想打得像職業球員。</p>
+<h4>中文翻譯</h4><p>只做過某件事一次就認為自己是專家，就等同於讀了一本籃球書，就期待自己能像職業球員一樣打球。</p>
+<h4>⭐ 必背搭配</h4><p><mark class="g">be equivalent to + N/V-ing</mark> 等同於……</p><p class="en">Ignoring the problem is equivalent to accepting it. <span class="stem-zh">忽視問題等同於接受它。</span></p>`},
+{id:2,part:1,hint:"f _ _ _ _ _ _ t t i n g",
+ stem:"The ___ of this article and the information included makes it difficult to follow.",
+ opts:["ownership","tolerance","formatting","equivalence"],ans:2,say:"formatting",
+ exp:`<h4>① 詞性</h4><p><b class="r">formatting</b> [U] 格式設定；排版。核心是 <span class="en">The formatting … makes it difficult to follow.</span> → 需要名詞。</p>
+<h4>② 上下文線索</h4><p><span class="en">this article</span> + <span class="en">the information included</span>：文章的排版和內容讓它難以閱讀。</p>
+<h4>中文翻譯</h4><p>這篇文章的排版方式以及其中包含的資訊，使它很難閱讀。</p>
+<h4>⭐ 重要搭配</h4><p>the formatting of a document 文件的排版／proper formatting 適當的格式設定</p>
+<div class="tip">小提醒：format [C] 格式；[vt.] 編排格式。formatting [U] 格式設定；排版。</div>`},
+{id:3,part:1,hint:"n _ _ _ _ _ _ _ e",
+ stem:"It took the two companies several months to ___ the details of the contract.",
+ opts:["negotiate","flourish","roam","manifest"],ans:0,say:"negotiate",
+ exp:`<h4>① 詞性</h4><p><b class="r">negotiate</b> [vi./vt.] 談判；協商。句型 <mark class="g">It takes/took + 人 + 時間 + to V</mark>，to 後接原形動詞。</p>
+<h4>② 上下文線索</h4><p><span class="en">the two companies</span> + <span class="en">the details of the contract</span> → 兩家公司花好幾個月協商合約細節。</p>
+<h4>中文翻譯</h4><p>兩家公司花了好幾個月的時間協商合約的細節。</p>
+<h4>⭐ 必背搭配</h4><ul><li>negotiate a contract / a deal 協商合約／交易</li><li><mark class="c">negotiate the terms of a contract</mark> 協商合約條款</li><li><mark class="c">negotiate with someone</mark> 與某人談判</li></ul>`},
+{id:4,part:1,hint:"p _ _ _ _ _ _ _ _ n s",
+ stem:"Make sure to take all of your ___ with you when you get out of the taxi.",
+ opts:["investments","transactions","possessions","trails"],ans:2,say:"possessions",
+ exp:`<h4>① 詞性</h4><p><b class="r">possession</b> [C] 財物；所有物。<span class="en">all of your + ___</span> → 需要複數名詞 possessions。</p>
+<h4>② 上下文線索</h4><p><span class="en">when you get out of the taxi</span> → 下車時要把所有東西帶走。</p>
+<h4>中文翻譯</h4><p><mark class="c">Make sure to</mark> <mark class="c">take all of your possessions with you</mark>：下計程車時，務必把所有個人物品都帶走。</p>
+<h4>⭐ 必背搭配</h4><p>personal possessions 個人物品／valuable possessions 貴重物品</p>
+<div class="tip">possessions → 通常指個人物品；property → 財產、也常指土地房屋，如 <mark class="c">private property</mark> 私人財產／私人土地。</div>`},
+{id:5,part:1,hint:"e _ _ _ _ _ e d",
+ stem:"The woman ___ that she wouldn't miss her flight by arriving at the airport early.",
+ opts:["assured","invested","flourished","ensured"],ans:3,say:"ensured",
+ exp:`<h4>① 詞性</h4><p><b class="r">ensure</b> [vt.] 確保。描述過去的事 → 過去式 ensured。</p>
+<h4>② 上下文線索</h4><p><span class="en">by arriving at the airport early</span> → 提早到機場，確保不會錯過班機。</p>
+<h4>中文翻譯</h4><p>這名女子藉由提早抵達機場，確保自己不會錯過班機。</p>
+<h4>⭐ 必背句型</h4><p><mark class="g">ensure that + S + V</mark> 確保……</p>
+<div class="tip">陷阱 assured：assure 要先接「人」→ <mark class="g">assure sb that…</mark>，不能直接 assured that she…。</div>`},
+{id:6,part:1,hint:"p _ _ _ _ _ _ y",
+ stem:"It is against the law to enter onto someone's private ___ without permission.",
+ opts:["warranty","property","domain","tolerance"],ans:1,say:"property",
+ exp:`<h4>① 詞性</h4><p><b class="r">property</b> [U] 財產；所有物；土地／房產。</p>
+<h4>② 上下文線索</h4><p><mark class="c">against the law</mark> + <mark class="c">without permission</mark> + private → private property 是非常明顯的線索。</p>
+<h4>中文翻譯</h4><p>未經允許進入他人的私人土地是違法的。</p>
+<h4>⭐ 必背搭配</h4><p>private property 私人財產／public property 公共財產／damage someone's property 損壞某人的財產</p>`},
+{id:7,part:1,hint:"e _ _ _ _ c i n g",
+ stem:"The man spent his final moments ___ his daughter before he passed away.",
+ opts:["investing","negotiating","embracing","formatting"],ans:2,say:"embracing",
+ exp:`<h4>① 詞性</h4><p><b class="r">embrace</b> [vt.] 擁抱；接受。句型 <mark class="g">spend + 時間 + V-ing</mark>。</p>
+<h4>② 上下文線索</h4><p><span class="en">his final moments</span> + <mark class="c">passed away</mark> → 去世前的最後時刻擁抱女兒。</p>
+<h4>中文翻譯</h4><p>這名男子在去世前的最後時刻，擁抱著他的女兒。</p>
+<h4>⭐ embrace 另一個重要意思</h4><p>embrace 也可以是<b class="r">「接受、採納」</b>：embrace change 接受改變／embrace new technology 採用新科技</p>
+<div class="tip">embrace someone → 擁抱某人；<mark class="c">embrace an idea/change</mark> → 接受想法／改變</div>`},
+{id:8,part:1,hint:"g _ _ _ _ _ _ _ e",
+ stem:"Due to the uncertainty of the economy, job security is never a ___.",
+ opts:["transaction","token","format","guarantee"],ans:3,say:"guarantee",
+ exp:`<h4>① 詞性</h4><p><b class="r">guarantee</b> [<span class="r">C</span>] 保證；保障。<span class="en">a + ___</span> → 可數名詞單數。</p>
+<h4>② 上下文線索</h4><p><span class="en">Due to the uncertainty of the economy</span> → 經濟不確定，工作保障就不是必然。</p>
+<h4>中文翻譯</h4><p>由於經濟情勢充滿不確定性，工作保障從來都不是一項必然的保證。</p>
+<h4>⭐ 常見用法</h4><ul><li><mark class="g">guarantee [C] + that 子句</mark></li><li><mark class="g">guarantee [vt.] + N</mark>：Nothing can guarantee success.</li><li><mark class="g">guarantee [vt.] that + S + V</mark></li></ul>
+<div class="tip">ensure 著重「採取行動確保發生」（第 5 題）；guarantee 著重「保證一定發生」。</div>`},
+{id:9,part:1,hint:"i _ _ _ _ _ _ _ _ t s",
+ stem:"The man's risky ___ ended up losing millions of dollars in a matter of months.",
+ opts:["investments","tokens","trails","formats"],ans:0,say:"investments",
+ exp:`<h4>① 詞性</h4><p><b class="r">investment</b> [C] 投資。主詞是 The man's risky investments，動詞 <mark class="c">ended up</mark> losing。</p>
+<h4>② 上下文線索</h4><p>risky 有風險的 + losing millions of dollars 損失數百萬 → 高風險的投資。</p>
+<h4>中文翻譯</h4><p>這名男子的高風險投資最終在短短幾個月內損失了數百萬美元。</p>
+<h4>⭐ 必背搭配</h4><p>make an investment 進行投資／a wise investment 明智的投資／return on investment 投資報酬</p>
+<p><mark class="c"><b class="r">in a matter of</b> + 時間</mark> 在短短……之內</p>`},
+{id:10,part:1,hint:"t _ _ _ n",
+ stem:"As a ___ of my appreciation, I would like to treat you to dinner and a movie.",
+ opts:["domain","token","trail","format"],ans:1,say:"token",
+ exp:`<h4>① 詞性</h4><p><b class="r">token</b> [C] 象徵；表示。<span class="en">a + ___</span> → 可數名詞單數。</p>
+<h4>② 上下文線索</h4><p><span class="en">my appreciation</span> + <span class="en">treat you <mark class="g">to</mark> dinner</span> → <mark class="g">所以這不是「token = 代幣」的意思</mark>，而是 <mark class="g">a token of appreciation = 表示感謝的一點心意</mark>。</p>
+<h4>中文翻譯</h4><p><mark class="c">As a token of</mark> my appreciation：為了表達感謝，我想請你吃晚餐並看場電影，聊表心意。</p>
+<h4>⭐ 重要搭配</h4><p>a token of gratitude / respect / friendship 感激／尊敬／友誼的象徵</p>
+<div class="tip">token 另一個意思：代幣，a subway token 地鐵代幣 → 一定要看上下文。</div>`},
+
+/* ---------- Part 2 ---------- */
+{id:11,part:2,stem:"The family has many ___, including two houses, a car, and their business.",
+ opts:["investors","negotiations","assets","owners"],ans:2,say:"assets",
+ exp:`<h4>句意</h4><p>這個家庭擁有許多資產，包括兩棟房子、一輛車以及他們的事業。</p>
+<h4>答案</h4><p><b class="r">asset</b> [C] 資產；有價值的東西。have/own assets／valuable assets／financial assets</p>
+<h4>上下文線索</h4><p>two houses, a car, and their business 都是具經濟價值、屬於這家人的東西 → 總稱 assets。</p>
+<h4>其他選項</h4><p>investor 投資者、owner 擁有者 → 都是「人」；negotiation 協商 → 過程。</p>`},
+{id:12,part:2,stem:"This is one of the most ___ clubs in town; only real VIPs can get in.",
+ opts:["transactional","exclusive","airtight","negotiable"],ans:1,say:"exclusive",
+ exp:`<h4>句意</h4><p>這是鎮上最高級、限定會員才能進入的俱樂部之一；只有真正的 VIP 才能進去。</p>
+<h4>答案</h4><p><b class="r">exclusive</b> [adj.] 限定的；排他的；高級的。<mark class="c">an exclusive club</mark>／exclusive access 專屬使用權</p>
+<h4>上下文線索</h4><p>only real VIPs can get in → 不是任何人都能進。</p>
+<h4>其他選項</h4><p>transactional 交易的；airtight 密封的、無懈可擊的（<mark class="c">an airtight container</mark>、<mark class="c">an airtight argument</mark>）；negotiable 可協商的（a negotiable price）</p>`},
+{id:13,part:2,stem:"If you follow this ___, it will lead you straight to the top of the mountain.",
+ opts:["warranty","defense","membership","trail"],ans:3,say:"trail",
+ exp:`<h4>句意</h4><p>如果你沿著這條山徑走，它會直接帶你到山頂。</p>
+<h4>答案</h4><p><b class="r">trail</b> [C] 小徑；山徑。a hiking trail／<b>follow a trail</b>／a trail leads to + 地方</p>
+<h4>上下文線索</h4><p>follow + lead you to the top of the mountain → 一定在說「路」。</p>
+<h4>其他選項</h4><p>warranty 保固（<mark class="c">a two-year warranty</mark>）；defense 防禦（self-defense）；membership 會員資格</p>`},
+{id:14,part:2,stem:"The man has intellectual ___ of the product, meaning it was legally his idea.",
+ opts:["ownership","negotiator","punishment","exclusiveness"],ans:0,say:"ownership",
+ exp:`<h4>句意</h4><p>這名男子擁有這項產品的智慧財產所有權，意思是這個點子在法律上屬於他。</p>
+<h4>答案</h4><p><b class="r">ownership</b> [U] 所有權。<mark class="c">intellectual property</mark> ownership 智慧財產所有權／have ownership of + N／take ownership of + N 對……負責</p>
+<h4>上下文線索</h4><p>legally his idea → 核心概念是「擁有」。</p>
+<h4>其他選項</h4><p>negotiator 談判者（人）；punishment 懲罰；exclusiveness 排他性</p>`},
+{id:15,part:2,stem:"As soon as the company was founded, they registered the ___ so no one could use it.",
+ opts:["natural disaster","domain name","social animal","mutual fund"],ans:1,say:"domain name",
+ exp:`<h4>句意</h4><p>公司一成立，他們就註冊了這個網域名稱，因此沒有人可以使用它。</p>
+<h4>答案</h4><p><b class="r">domain name</b> [C] 網域名稱，例如 example.com。register / own a domain name</p>
+<h4>上下文線索</h4><p>register + so no one could use it → 先註冊網路名稱，避免被別人用。</p>
+<h4>其他選項</h4><p>natural disaster 天然災害；social animal 群居動物；mutual fund 共同基金（可以 invest in，但不是「註冊」）</p>`},
+{id:16,part:2,stem:"Most credit card companies make their money from small ___ between businesses.",
+ opts:["transactions","belongings","corporations","servings"],ans:0,say:"transactions",
+ exp:`<h4>句意</h4><p>大多數信用卡公司透過企業之間的小型交易賺錢。</p>
+<h4>答案</h4><p><b class="r">transaction</b> [C] 交易。a credit card transaction／<mark class="c">complete a transaction</mark>／make a transaction</p>
+<h4>上下文線索</h4><p>credit card companies + make money + between businesses → 從刷卡「交易」賺手續費。</p>
+<h4>其他選項</h4><p>belongings 個人物品；corporations 公司；servings 一份食物（a serving of rice）</p>`},
+{id:17,part:2,stem:"Unable to do anything, the woman chose to ___ the changes in her life.",
+ opts:["roam","invest","embrace","flourish"],ans:2,say:"embrace",
+ exp:`<h4>句意</h4><p>由於無法做任何事情，這名女子選擇欣然接受生活中的變化。</p>
+<h4>答案</h4><p><b class="r">embrace</b> [vt.] 接受；欣然採納。embrace change／new ideas／new opportunities</p>
+<h4>上下文線索</h4><p>Unable to do anything → 阻止不了，只好接受。</p>
+<h4>其他選項</h4><p>roam 漫遊（roam around the city）；invest 投資（invest in stocks）；flourish 蓬勃發展（vi.，不接受詞）</p>`},
+{id:18,part:2,stem:"___ people skills is important for maintaining healthy personal relationships.",
+ opts:["Assuring","Belonging","Interacting","Possessing"],ans:3,say:"possessing",
+ exp:`<h4>句意</h4><p>具備<mark class="c">人際交往能力</mark>對維持健康的人際關係很重要。</p>
+<h4>答案</h4><p><b class="r">possess</b> [vt.] 擁有；具備。Possessing people skills <mark class="g">是動名詞片語，當主詞</mark>。</p>
+<p><mark class="c">people skills [U]</mark> 與人相處的能力：have good / develop people skills</p>
+<h4>其他選項</h4><p>Assuring → assure someone that…；Belonging → <mark class="c">belong to + N</mark>；Interacting → <mark class="c">interact with people</mark>。後兩個是 vi.，不能直接接 people skills。</p>
+<div class="tip">📌 這題的重點句型：V-ing + object + is + adjective</div>`},
+{id:19,part:2,stem:"Make sure the report is in the right ___ before you give it to the boss.",
+ opts:["investment","format","equivalence","negotiation"],ans:1,say:"format",
+ exp:`<h4>句意</h4><p>把報告交給老闆之前，務必確認它的格式正確。</p>
+<h4>答案</h4><p><b class="r">format</b> [C] 格式。the right / a standard format；format [vt.] a document</p>
+<h4>上下文線索</h4><p>report + before you give it to the boss → 確認報告格式。</p>
+<h4>其他選項</h4><p>investment 投資；equivalence 等同；negotiation 協商（enter into negotiations）</p>
+<div class="tip">📌 be in the right format 格式正確；Please submit the file <mark class="g">in</mark> PDF format.</div>`},
+{id:20,part:2,stem:"Eating a balanced meal will ___ that you have enough energy for the day.",
+ opts:["accomplish","threaten","ensure","manifest"],ans:2,say:"ensure",
+ exp:`<h4>句意</h4><p>吃均衡的餐點可以確保你一天有足夠的能量。</p>
+<h4>答案</h4><p><b class="r">ensure</b> [vt.] 確保。句型線索 will + ___ + that + S + V → <b>ensure that + 子句</b>。</p>
+<h4>其他選項</h4><p>accomplish a goal 達成目標，不能接 that 子句；threaten → <mark class="g">threaten someone</mark>／<mark class="g">threaten to do something</mark>；manifest symptoms 顯現症狀</p>
+<h4>📌 ensure vs. assure vs. insure</h4><ul><li>ensure 確保某事發生 → ensure that… / ensure N</li><li>assure 向「人」保證 → <mark class="g">assure sb that…</mark>／<mark class="g">assure sb of sth</mark></li><li>insure 投保 → insure a house for $／against N</li></ul>`},
+
+/* ---------- Part 3 ---------- */
+{id:21,part:3,stem:"The digital ___ in question is called an NFT.",
+ opts:["equivalence","guarantee","asset","negotiation"],ans:2,say:"asset",
+ exp:`<h4>為什麼選 asset？</h4><p><b class="r">asset</b> [C] 資產。<b>a digital asset</b> 數位資產是固定搭配；NFT 可以被擁有、買賣、有經濟價值，後面還說熱門 NFT 賣到數百萬美元。</p>
+<h4>文法線索</h4><p>the + 名詞 + <mark class="c">in question</mark> =「所<mark class="c">討論的</mark>／這裡所說的……」→ 空格需要名詞。</p>
+<h4>其他選項</h4><p>equivalence 是「兩者相等」的概念；guarantee 保證（<mark class="c">a money-back guarantee</mark> 退款保證）；negotiation 協商</p>`},
+{id:22,part:3,stem:'These "non-fungible ___" can only be purchased on the Internet.',
+ opts:["trillions","tokens","transactions","trails"],ans:1,say:"tokens",
+ exp:`<h4>為什麼選 tokens？</h4><p>NFT = <b>non-fungible tokens</b> 非同質化代幣，這是最直接的線索。<b class="r">token</b> [C] 代幣；象徵。</p>
+<h4>文法線索</h4><p>These 是複數 → token 要加 s。</p>
+<h4>其他選項</h4><p>trillions 數兆；transactions → 買 NFT 才是交易，NFT 本身不是；trails 小徑</p>
+<div class="tip">📌 這題其實是「專有名詞」題：看到 non-fungible ___ 幾乎直接想到 tokens。</div>`},
+{id:23,part:3,stem:"This has opened up an entirely new space for ___, as some of the most popular NFTs have sold for millions of dollars!",
+ opts:["investments","exclusives","guarantees","formats"],ans:0,say:"investments",
+ exp:`<h4>為什麼選 investments？</h4><p>前文一直在說 NFT 可以買賣、能賣到數百萬 → valuable → 人們買來期待增值 → <b class="r">investments</b>。</p>
+<h4>文法與語意</h4><p>open up a new space for + 名詞 = 為……開闢新領域</p>
+<h4>其他選項</h4><p>exclusives 獨家商品，搭配不自然；guarantees 保證；formats 格式</p>
+<div class="tip">📌 sold for millions of dollars 是在暗示：NFTs have become something people can invest in.</div>`},
+{id:24,part:3,stem:"These modern forms of ___ have also changed the way cryptocurrencies are valued.",
+ opts:["warranty","domain","property","tolerance"],ans:2,say:"property",
+ exp:`<h4>為什麼選 property？</h4><p><b class="r">property</b> [U] 財產；所有物。intellectual / digital / private property；forms of property 各種形式的財產。</p>
+<h4>為什麼第 21 題是 asset，第 24 題卻是 property？</h4><p>asset 強調有經濟價值、能創造價值；property 強調屬於某人、具有所有權。21 在介紹 NFT「是什麼」；24 在討論 NFT 作為一種「財產形式」。</p>
+<h4>其他選項</h4><p>warranty 保固；domain 領域、網域，forms of domain 不合理；tolerance 容忍（<mark class="c">tolerance for</mark> different opinions）</p>`},
+{id:25,part:3,stem:"In general, most products have a(n) ___ value, which is compared against the U.S. dollar.",
+ opts:["conscious","equivalent","formatted","destined"],ans:1,say:"equivalent",
+ exp:`<h4>為什麼選 equivalent？</h4><p><b class="r">equivalent</b> [adj.] 等值的；[C] 等價物。an equivalent value = 相當的價值，拿來和美元比較。</p>
+<p><mark class="g">be equivalent to + N/V-ing</mark>：One U.S. dollar is equivalent to about 32 Taiwan dollars.</p>
+<h4>文法線索</h4><p>四個選項都能當形容詞 → 這題不能只靠詞性，要看語意搭配。</p>
+<h4>其他選項</h4><p>conscious → be conscious of 意識到；formatted → a formatted document；destined → be destined for 前往／be destined to V 注定要</p>`},
+
+/* ---------- Part 4 ---------- */
+{id:26,part:4,zh:true,stem:"What is the second paragraph mainly about?",
+ opts:["The history of cryptocurrency","The price of cryptocurrency","The technology of cryptocurrency","The potential of cryptocurrency"],ans:3,clue:["s6","s7","s8","s9"],say:"potential",
+ exp:`<h4>線索</h4><p>第二段談：investment opportunity、accepted form of payment、replacement of modern money、easier to use / more secure、true value is beginning to reveal itself → 都在說加密貨幣「未來可能變成什麼」。</p>
+<p><b class="r">potential</b> [U] 潛力；可能性</p>
+<h4>其他選項</h4><ul><li>(A) 歷史 → 在第一段（since its creation in 2015、Originally…）</li><li>(B) 價格 → <b>value ≠ price</b>，這裡的 value 是價值、重要性</li><li>(C) 科技 → 沒談區塊鏈、挖礦；more secure 只是其中一個特點</li></ul>`},
+{id:27,part:4,stem:"What allowed cryptocurrencies to be used to make daily purchases?",
+ opts:["The support of different companies","The investments that people made","The creation of cryptocurrency credit cards","The creation of different cryptocurrencies"],ans:2,clue:["s5"],say:"credit cards",
+ exp:`<h4>線索（細節題）</h4><p class="en">With the introduction of crypto credit cards, cryptocurrencies can now be used to make everyday transactions…</p>
+<p>allow + O + to V → 問「什麼讓它可以……」，文章直接給答案：信用卡的推出。</p>
+<h4>其他選項</h4><ul><li>(A) 公司支持 → 和「被接受」有關，但不是日常購買的直接原因。<b>相關 ≠ 最直接回答問題</b></li><li>(B) 投資 → 只說可以拿來投資</li><li>(D) 文章沒說「創造不同的加密貨幣」</li></ul>`},
+{id:28,part:4,stem:'What does "this" in the first paragraph refer to?',
+ opts:["Cryptocurrency's use","Cryptocurrency's history","The crypto credit card","Traditional money"],ans:0,clue:["s3","s4"],say:"use",
+ exp:`<h4>線索（代名詞指涉題）</h4><p class="en">Originally, its primary use was to buy digital assets. But recently, this has started to change.</p>
+<p>it → cryptocurrency；its → cryptocurrency's；<b>this → its primary use</b>。以前主要買 digital assets → 現在能買日用品、理髮 → 用途改變了。</p>
+<h4>其他選項</h4><ul><li>(B) 雖然有 Historically，但「開始改變」的是用途，不是歷史</li><li>(C) crypto credit cards 在 this <b>之後</b>才出現，不可能是指涉對象</li><li>(D) the money we are used to using 是拿來對比的</li></ul>`}
+];
+
+const CLOZE = `<p>In 2021, a new type of digital media completely changed the way people thought about buying and selling their products. The digital [21] in question is called an NFT. These "non-fungible [22]" can only be purchased on the Internet. This has opened up an entirely new space for [23], as some of the most popular NFTs have sold for millions of dollars!</p><p>These modern forms of [24] have also changed the way cryptocurrencies are valued. In general, most products have a(n) [25] value, which is compared against the U.S. dollar. Cryptocurrencies didn't have this until the introduction of NFTs, which makes their increase in popularity all the more exciting.</p>`;
+
+const READING = [
+ ["s1","Cryptocurrency has come a long way since its creation in 2015."],
+ ["s2","Historically, it hasn't been considered an equivalent to the money we are used to using."],
+ ["s3","Originally, its primary use was to buy digital assets."],
+ ["s4","But recently, this has started to change."],
+ ["s5","With the introduction of crypto credit cards, cryptocurrencies can now be used to make everyday transactions like buying groceries or getting your hair cut."],
+ "|",
+ ["s6","As more companies embrace and support cryptocurrencies, it has become both an investment opportunity and an accepted form of payment."],
+ ["s7","These practical applications of Bitcoin and other cryptocurrencies point to the replacement of modern money as we know it."],
+ ["s8","They are becoming easier to use, more secure, and a guaranteed way to protect yourself from rising inflation."],
+ ["s9","And although the future is still uncertain, crypto's true value is slowly beginning to reveal itself."]
+];
+
+const CHIPS = [["come a long way","經歷很大的發展"],["be considered an equivalent to + N","被視為與……等值"],["be used to + V-ing","習慣於做……"],["primary use","主要用途"],["with the introduction of + N","隨著……的推出"],["make everyday transactions","進行日常交易"],["embrace and support + N","接受並支持……"],["an investment opportunity","投資機會"],["an accepted form of payment","被接受的支付方式"],["point to + N","顯示……；指向……"],["as we know it","我們所熟知的……"],["rising inflation","日益上升的通膨"],["reveal itself","顯現出來"]];
+
+const CHEERS = ["答對了！幸運草 +1","柔柔好厲害！","完美命中 ✨","這題穩穩拿下！","漂亮～又一片 🍀","觀念超清楚！","閃閃發光的答案 🌟"];
+const NUDGES = ["差一點點～看看解析","沒關係，這題學起來就是你的了","陷阱抓到你了，下次換你抓它！","看完解析再挑戰一次吧"];
+const STREAKS = {3:"三連勝！🔥",5:"五連勝！手感火熱 🔥🔥",8:"八連勝！停不下來～",10:"十連勝！！無人能擋 👑",15:"十五連勝！傳說級 🌈",20:"二十連勝！四葉草女王降臨 👑🍀"};
+
+/* ============ STATE ============ */
+const KEY="rourou-test03-v1";
+let S = {mode:"practice",ans:{},submitted:false,streak:0,best:0};
+try{const raw=localStorage.getItem(KEY); if(raw) S=Object.assign(S,JSON.parse(raw));}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const L="ABCD";
+const $=s=>document.querySelector(s);
+const esc=s=>s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+
+/* ============ RENDER ============ */
+function stemHTML(q){
+  const t=esc(q.stem).replace("___",`<span class="blank" id="b${q.id}">&nbsp;</span>`);
+  return t;
+}
+function qHTML(q){
+  return `<article class="q" id="q${q.id}" data-id="${q.id}">
+    <div class="q-top"><div class="qn">${q.id}</div><div class="stem">${stemHTML(q)}</div></div>
+    ${q.hint?`<button class="hint-btn" data-hint="${q.id}">💡 看字母提示</button>`:""}
+    <div class="opts">${q.opts.map((o,i)=>`<button class="opt" data-q="${q.id}" data-i="${i}"><span class="l">${L[i]}</span><span>${esc(o)}</span></button>`).join("")}</div>
+    <div class="fb"></div>
+  </article>`;
+}
+[1,2,3,4].forEach(p=>{$("#list"+p).innerHTML=Q.filter(q=>q.part===p).map(qHTML).join("")});
+$("#cloze").innerHTML=CLOZE.replace(/\[(\d+)\]/g,(m,n)=>`<button class="cblank" data-go="${n}" id="cb${n}"><sup>${n}</sup><span>______</span></button>`);
+{
+  let h="<p>";
+  READING.forEach(r=>{ if(r==="|"){h+="</p><p>";return;} h+=`<span class="sent" id="${r[0]}">${esc(r[1])}</span> `;});
+  $("#reading").innerHTML=h+"</p>";
+}
+$("#chips").innerHTML=CHIPS.map(c=>`<button class="chip"><span class="f">${c[0]}</span><span class="b">${c[1]}</span></button>`).join("");
+
+/* ============ LOGIC ============ */
+const byId=id=>Q.find(q=>q.id===id);
+const isRevealed=()=>S.mode==="practice"||S.submitted;
+
+function paint(q){
+  const el=$("#q"+q.id), a=S.ans[q.id];
+  const btns=el.querySelectorAll(".opt"), fb=el.querySelector(".fb");
+  el.classList.remove("ok","no");
+  btns.forEach((b,i)=>{b.className="opt";b.disabled=false;});
+  fb.innerHTML="";
+  const hb=el.querySelector(".hint-btn"); if(hb) hb.hidden=false;
+  const blank=$("#b"+q.id);
+  if(blank) blank.innerHTML="&nbsp;";
+  const cb=$("#cb"+q.id);
+  if(cb){cb.className="cblank";cb.querySelector("span").textContent="______";}
+  if(q.clue) q.clue.forEach(s=>{const e=$("#"+s);e.classList.remove("clue");e.querySelectorAll(".tag").forEach(t=>t.remove());});
+  if(a===undefined) return;
+  if(!isRevealed()){ btns[a].classList.add("sel"); return; }
+  const ok=a===q.ans;
+  if(hb) hb.hidden=true;
+  el.classList.add(ok?"ok":"no");
+  btns.forEach((b,i)=>{b.disabled=true; if(i===q.ans)b.classList.add("right"); else if(i===a)b.classList.add("wrong");});
+  if(blank && q.part!==4) blank.textContent=q.opts[q.ans];
+  if(cb){cb.classList.add(ok?"done":"miss");cb.querySelector("span").textContent=q.opts[q.ans];}
+  if(q.clue) q.clue.forEach((s,k)=>{const e=$("#"+s);e.classList.add("clue");if(k===q.clue.length-1){const t=document.createElement("span");t.className="tag";t.textContent=q.id+"("+L[q.ans]+")";e.appendChild(t);}});
+  fb.innerHTML=`<div class="verdict ${ok?"ok":"no"}">${ok?"🍀 答對了！":"💭 正解是 ("+L[q.ans]+") "+esc(q.opts[q.ans])}<button class="say" data-say="${esc(q.say)}">🔊 ${esc(q.say)}</button></div><div class="exp">${q.exp}</div>`;
+}
+function paintAll(){Q.forEach(paint);stats();}
+
+function stats(){
+  const done=Object.keys(S.ans).length;
+  const correct=Q.filter(q=>S.ans[q.id]===q.ans).length;
+  const shown=isRevealed()?correct:0;
+  $("#jarN").textContent=shown;
+  $("#progI").style.width=(done/Q.length*100)+"%";
+  $("#progT").textContent=done+"/"+Q.length;
+  $("#streak").textContent=(S.mode==="practice"&&S.streak>=2)?"🔥 "+S.streak+" 連對":"";
+  document.querySelectorAll("[data-ps]").forEach(e=>{
+    const p=+e.dataset.ps, qs=Q.filter(q=>q.part===p);
+    const d=qs.filter(q=>S.ans[q.id]!==undefined).length;
+    e.textContent=isRevealed()&&d? "🍀 "+qs.filter(q=>S.ans[q.id]===q.ans).length+"/"+qs.length : "";
+  });
+  $("#mPractice").setAttribute("aria-pressed",S.mode==="practice");
+  $("#mExam").setAttribute("aria-pressed",S.mode==="exam");
+  $("#submitWrap").hidden=!(S.mode==="exam"&&!S.submitted);
+}
+
+function choose(id,i,btn){
+  const q=byId(id);
+  if(S.mode==="exam"){
+    if(S.submitted) return;
+    S.ans[id]=i; save(); paint(q); stats(); return;
+  }
+  if(S.ans[id]!==undefined) return;
+  S.ans[id]=i;
+  const ok=i===q.ans;
+  if(ok){S.streak++;S.best=Math.max(S.best,S.streak);} else S.streak=0;
+  save(); paint(q); stats();
+  if(ok){
+    const msg=STREAKS[S.streak]||CHEERS[Math.floor(Math.random()*CHEERS.length)];
+    toast(msg,true); flyClover(btn); burst(btn, STREAKS[S.streak]?70:26);
+  } else {
+    toast(NUDGES[Math.floor(Math.random()*NUDGES.length)],false);
+  }
+  if(Object.keys(S.ans).length===Q.length) setTimeout(showResult,1100);
+}
+
+/* ============ FEEDBACK FX ============ */
+let tt;
+function toast(msg,ok){const t=$("#toast");t.textContent=msg;t.className="toast show"+(ok?"":" no");clearTimeout(tt);tt=setTimeout(()=>t.className="toast"+(ok?"":" no"),1500);}
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+function flyClover(from){
+  const jar=$("#jar");
+  if(reduce){jar.classList.remove("bump");void jar.offsetWidth;jar.classList.add("bump");return;}
+  const a=from.getBoundingClientRect(), b=jar.getBoundingClientRect();
+  const f=document.createElement("div");f.className="fly";f.textContent="🍀";
+  f.style.left=(a.left+a.width/2-15)+"px";f.style.top=(a.top+a.height/2-15)+"px";
+  document.body.appendChild(f);
+  requestAnimationFrame(()=>{f.style.transform=`translate(${b.left+14-(a.left+a.width/2-15)}px,${b.top+4-(a.top+a.height/2-15)}px) scale(.6) rotate(360deg)`;});
+  setTimeout(()=>{f.remove();jar.classList.remove("bump");void jar.offsetWidth;jar.classList.add("bump");},760);
+}
+const cv=$("#fx"),cx=cv.getContext("2d");let parts=[],raf=null;
+function fit(){cv.width=innerWidth*devicePixelRatio;cv.height=innerHeight*devicePixelRatio;}
+fit();addEventListener("resize",fit);
+const COLORS=["#EE5F9C","#4FC1D1","#34B557","#FFCF3F","#FAD1E3"];
+function burst(el,n){
+  if(reduce) return;
+  let x=innerWidth/2,y=innerHeight/2;
+  if(el){const r=el.getBoundingClientRect();x=r.left+r.width/2;y=r.top+r.height/2;}
+  for(let k=0;k<n;k++){const ang=Math.random()*Math.PI*2,sp=3+Math.random()*6;
+    parts.push({x,y,vx:Math.cos(ang)*sp,vy:Math.sin(ang)*sp-4,r:4+Math.random()*5,c:COLORS[k%5],rot:Math.random()*6,vr:(Math.random()-.5)*.3,life:0,shape:k%3});}
+  if(!raf) loop();
+}
+function heart(x,y,s){cx.beginPath();cx.moveTo(x,y+s*.3);cx.bezierCurveTo(x,y,x-s,y,x-s,y+s*.4);cx.bezierCurveTo(x-s,y+s*.9,x,y+s*1.1,x,y+s*1.4);cx.bezierCurveTo(x,y+s*1.1,x+s,y+s*.9,x+s,y+s*.4);cx.bezierCurveTo(x+s,y,x,y,x,y+s*.3);cx.fill();}
+function loop(){
+  const d=devicePixelRatio;cx.clearRect(0,0,cv.width,cv.height);
+  parts.forEach(p=>{p.vy+=.22;p.vx*=.99;p.x+=p.vx;p.y+=p.vy;p.rot+=p.vr;p.life++;
+    cx.save();cx.globalAlpha=Math.max(0,1-p.life/90);cx.translate(p.x*d,p.y*d);cx.rotate(p.rot);cx.fillStyle=p.c;
+    const s=p.r*d;
+    if(p.shape===0){cx.fillRect(-s,-s/2,s*2,s);}
+    else if(p.shape===1){heart(0,-s*.7,s*.8);}
+    else{for(let j=0;j<4;j++){cx.beginPath();cx.arc(Math.cos(j*Math.PI/2)*s*.55,Math.sin(j*Math.PI/2)*s*.55,s*.55,0,7);cx.fill();}}
+    cx.restore();});
+  parts=parts.filter(p=>p.life<90&&p.y<innerHeight+40);
+  raf=parts.length?requestAnimationFrame(loop):(cx.clearRect(0,0,cv.width,cv.height),null);
+}
+
+/* ============ RESULT ============ */
+function showResult(){
+  const correct=Q.filter(q=>S.ans[q.id]===q.ans).length, wrong=Q.filter(q=>S.ans[q.id]!==q.ans);
+  const pct=correct/Q.length;
+  let b,t,m;
+  if(pct===1){b="👑";t="四葉草女王";m="28 題全對！每一片幸運草都是你自己收集來的。";}
+  else if(pct>=.85){b="🌸";t="閃亮高手";m="只差一點點就滿分，把錯的那幾題再看一次就完美了。";}
+  else if(pct>=.7){b="⭐";t="穩穩前進";m="基本功很扎實！錯題的解析記得做筆記。";}
+  else {b="🌱";t="正在發芽";m="每一題錯題都是下次答對的種子，先重做錯題看看吧。";}
+  $("#rBadge").textContent=b;$("#rTitle").textContent=t;$("#rScore").textContent=correct;
+  $("#rRow").textContent="🍀".repeat(correct)+"🤍".repeat(Q.length-correct);
+  $("#rMsg").textContent=m+(S.best>=3?`（最長連對 ${S.best} 題）`:"");
+  $("#rWrong").textContent=wrong.length?"錯題："+wrong.map(q=>q.id).join("、"):"";
+  $("#retryWrong").hidden=!wrong.length;
+  $("#modal").classList.add("show");
+  burst(null,pct>=.85?160:70);
+  setTimeout(()=>burst(null,pct===1?160:0),500);
+}
+
+/* ============ EVENTS ============ */
+document.addEventListener("click",e=>{
+  const o=e.target.closest(".opt"); if(o&&!o.disabled){choose(+o.dataset.q,+o.dataset.i,o);return;}
+  const h=e.target.closest("[data-hint]"); if(h){const q=byId(+h.dataset.hint);h.innerHTML=`💡 <span class="hint">${q.hint}</span>`;h.disabled=true;return;}
+  const sy=e.target.closest("[data-say]"); if(sy){speak(sy.dataset.say);return;}
+  const g=e.target.closest("[data-go]"); if(g){const t=$("#q"+g.dataset.go);t.scrollIntoView({block:"center"});t.animate&&!reduce&&t.animate([{transform:"scale(1)"},{transform:"scale(1.02)"},{transform:"scale(1)"}],{duration:400});return;}
+  const z=e.target.closest("[data-t]"); if(z){const p=$("#"+z.dataset.t);p.classList.toggle("show");z.textContent=p.classList.contains("show")?"收起中文翻譯":"看中文翻譯";return;}
+  const c=e.target.closest(".chip"); if(c){c.classList.toggle("flip");return;}
+});
+function speak(w){
+  try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(w);u.lang="en-US";u.rate=.9;
+    const v=speechSynthesis.getVoices().find(v=>v.lang==="en-US");if(v)u.voice=v;speechSynthesis.speak(u);}catch(e){}
+}
+function setMode(m){
+  if(m===S.mode) return;
+  if(Object.keys(S.ans).length&&!confirm("切換模式會清空目前的作答，要繼續嗎？")) return;
+  S={mode:m,ans:{},submitted:false,streak:0,best:0};save();paintAll();
+  toast(m==="exam"?"考試模式：寫完再按交卷":"練習模式：點下去就看解析",true);
+}
+$("#mPractice").onclick=()=>setMode("practice");
+$("#mExam").onclick=()=>setMode("exam");
+$("#submitBtn").onclick=()=>{
+  const left=Q.length-Object.keys(S.ans).length;
+  if(left&&!confirm(`還有 ${left} 題沒作答，確定交卷嗎？`)) return;
+  S.submitted=true;save();paintAll();showResult();
+};
+$("#resetBtn").onclick=()=>{if(!confirm("確定要清空所有作答重新開始嗎？"))return;S={mode:S.mode,ans:{},submitted:false,streak:0,best:0};save();paintAll();scrollTo({top:0});};
+$("#closeModal").onclick=()=>$("#modal").classList.remove("show");
+$("#modal").addEventListener("click",e=>{if(e.target.id==="modal")$("#modal").classList.remove("show");});
+$("#retryWrong").onclick=()=>{
+  const wrong=Q.filter(q=>S.ans[q.id]!==q.ans);
+  wrong.forEach(q=>delete S.ans[q.id]);
+  S.submitted=false;S.streak=0;save();paintAll();
+  $("#modal").classList.remove("show");
+  $("#q"+wrong[0].id).scrollIntoView({block:"center"});
+  toast("錯題重新挑戰！",true);
+};
+document.addEventListener("keydown",e=>{if(e.key==="Escape")$("#modal").classList.remove("show");});
+
+/* theme */
+const root=document.documentElement;
+function curDark(){const t=root.dataset.theme;return t?t==="dark":matchMedia("(prefers-color-scheme: dark)").matches;}
+try{const t=localStorage.getItem(KEY+"-theme");if(t)root.dataset.theme=t;}catch(e){}
+const tb=$("#themeBtn");
+const syncTheme=()=>tb.textContent=curDark()?"☀️":"🌙";
+tb.onclick=()=>{root.dataset.theme=curDark()?"light":"dark";try{localStorage.setItem(KEY+"-theme",root.dataset.theme)}catch(e){}syncTheme();};
+syncTheme();
+
+paintAll();
+</script>
+</body>
+</html>
